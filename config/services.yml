@@ -1,0 +1,10 @@
+services:
+    forumhulp.loginwithemail.listener:
+        class: forumhulp\loginwithemail\event\listener
+        arguments:
+            - @user
+            - @config
+            - @request
+            - @template
+        tags:
+            - { name: event.listener }
