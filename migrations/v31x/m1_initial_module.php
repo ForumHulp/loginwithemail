@@ -65,7 +65,7 @@ class m1_initial_module extends container_aware_migration
 					$this->container->get('request'),
 					$this->container->get('log'),
 					$this->container->get('cache'),
-					$this->phpbb_root_path			
+					$this->phpbb_root_path
 				);
 				$this->container->set('forumhulp.helper', $forumhulp_helper);
 			}
@@ -73,7 +73,7 @@ class m1_initial_module extends container_aware_migration
 		} else
 		{
 			$this->container->get('user')->add_lang_ext('forumhulp/loginwithemail', 'info_acp_loginwithemail');
-			trigger_error($this->container->get('user')->lang['FH_HELPER_NOTICE'], E_USER_WARNING);	
+			trigger_error($this->container->get('user')->lang['FH_HELPER_NOTICE'], E_USER_WARNING);
 		}
 	}
 

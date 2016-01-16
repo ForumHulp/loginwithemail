@@ -40,7 +40,7 @@ class listener implements EventSubscriberInterface
 			'core.acp_board_config_edit_add'		=> 'load_config_on_setup',
 		);
 	}
-	
+
 	public function add_email($event)
 	{
 		if ($this->user->data['user_id'] == ANONYMOUS && $this->config['allow_email_login'])
@@ -55,11 +55,11 @@ class listener implements EventSubscriberInterface
 		if (!defined('ADMIN_START') && $this->config['allow_email_login'])
 		{
 			$user_email = $event['username_clean'];
-			
+
 			if (!phpbb_validate_email($user_email))
 			{
 				$sql = $event['sql'];
-		
+
 				$sql = 'SELECT *
 					FROM ' . USERS_TABLE . "
 					WHERE user_email_hash = '" . phpbb_email_hash($user_email) . "'";
@@ -99,7 +99,7 @@ class listener implements EventSubscriberInterface
 	static function allow_email_login($value, $key)
 	{
 		global $db, $config, $user;
-		
+
 		$not_allowed = false;
 		if (!$config['allow_emailreuse'])
 		{
