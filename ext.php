@@ -36,8 +36,9 @@ class ext extends \phpbb\extension\base
 				$this->container->get('template')->assign_var('L_EXTENSION_ENABLE_SUCCESS', $this->container->get('user')->lang['EXTENSION_ENABLE_SUCCESS'] .
 					(isset($this->container->get('user')->lang['LIWE_NOTICE']) ?
 							sprintf($this->container->get('user')->lang['LIWE_NOTICE'],
-									$this->container->get('user')->lang['ACP_CAT_POSTING'],
-									$this->container->get('user')->lang['ACP_MESSAGES'],
+									$this->container->get('user')->lang['ACP_CAT_GENERAL'],
+									$this->container->get('user')->lang['ACP_BOARD_CONFIGURATION'],
+									$this->container->get('user')->lang['ACP_REGISTER_SETTINGS'],
 									$this->container->get('user')->lang['ACP_LIWE']) : ''));
 
 				// Run parent enable step method
