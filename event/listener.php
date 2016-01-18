@@ -43,7 +43,7 @@ class listener implements EventSubscriberInterface
 
 	public function add_email($event)
 	{
-		if ($this->user->data['user_id'] == ANONYMOUS && $this->config['allow_email_login'])
+		if ($this->user->data['user_id'] == ANONYMOUS && $this->config['allow_email_login'] && !$this->request->is_set_post('agreed'))
 		{
 			$this->user->add_lang_ext('forumhulp/loginwithemail', 'info_acp_loginwithemail');
 			$this->template->assign_var('L_USERNAME', $this->user->lang['USERNAME'] . $this->user->lang['WITH_EMAIL']);
