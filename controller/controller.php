@@ -38,18 +38,19 @@ class controller
 	*/
 	public function find_dup()
 	{
+		$this->user->add_lang_ext('forumhulp/loginwithemail', 'info_acp_loginwithemail');
+		$sql = 'SELECT username, user_email FROM ' . USERS_TABLE . ' list
+				INNER JOIN (SELECT user_email_hash FROM ' . USERS_TABLE . ' WHERE user_type <> 2
+				GROUP BY user_email_hash HAVING count(user_email_hash) > 1) dup ON list.user_email_hash = dup.user_email_hash';
+		$result = $this->db->sql_query($sql);
+		$message = '';
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			$message .= $row['username'] . ' » ' . $row['user_email'] . '<br />';
+		}
+		
 		if ($this->request->is_ajax())
 		{
-			$this->user->add_lang_ext('forumhulp/loginwithemail', 'info_acp_loginwithemail');
-			$sql = 'SELECT username, user_email FROM ' . USERS_TABLE . ' list
-					INNER JOIN (SELECT user_email_hash FROM ' . USERS_TABLE . ' WHERE user_type <> 2
-					GROUP BY user_email_hash HAVING count(user_email_hash) > 1) dup ON list.user_email_hash = dup.user_email_hash';
-			$result = $this->db->sql_query($sql);
-			$message = '';
-			while ($row = $this->db->sql_fetchrow($result))
-			{
-				$message .= $row['username'] . ' » ' . $row['user_email'] . '<br />';
-			}
 			$json_response = new \phpbb\json_response;
 			$json_response->send(array(
 				'MESSAGE_TITLE'	=> $this->user->lang['DUP_RECORDS_FOUND'],
@@ -57,7 +58,7 @@ class controller
 			));
 		} else
 		{
-			trigger_error($message . adm_back_link($this->u_action), E_USER_NOTICE);
+			trigger_error($message, E_USER_NOTICE);
 		}
 	}
 }

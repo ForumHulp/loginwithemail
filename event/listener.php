@@ -36,7 +36,7 @@ class listener implements EventSubscriberInterface
 	{
 		return array(
 			'forumhulp.loginwithemail.modify_sql'	=> 'login_with_email',
-			'core.user_setup'						=> 'add_email',
+			'core.page_header_after'				=> 'add_email',
 			'core.acp_board_config_edit_add'		=> 'load_config_on_setup',
 		);
 	}
