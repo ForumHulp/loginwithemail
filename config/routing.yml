@@ -1,0 +1,3 @@
+forumhulp_loginwithemail_controller:
+    pattern: /loginwithemail/
+    defaults: { _controller: forumhulp.loginwithemail.controller:find_dup }

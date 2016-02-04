@@ -98,7 +98,7 @@ class listener implements EventSubscriberInterface
 
 	static function allow_email_login($value, $key)
 	{
-		global $db, $config, $user;
+		global $db, $config, $user, $phpbb_container;
 
 		$not_allowed = false;
 		if (!$config['allow_emailreuse'])
@@ -107,7 +107,8 @@ class listener implements EventSubscriberInterface
 			$result = $db->sql_query($sql);
 			$row = $db->sql_fetchrow($result);
 			$not_allowed = $row;
-			$message = ($row) ? $user->lang['DUP_RECORDS'] : '';
+			$helper = $phpbb_container->get('controller.helper');
+			$message = ($row) ? $user->lang('DUP_RECORDS', $helper->route('forumhulp_loginwithemail_controller')) : '';
 		} else
 		{
 			$not_allowed = true;

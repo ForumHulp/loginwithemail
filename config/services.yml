@@ -8,3 +8,10 @@ services:
             - @template
         tags:
             - { name: event.listener }
+    forumhulp.loginwithemail.controller:
+        class: forumhulp\loginwithemail\controller\controller
+        arguments:
+            - @dbal.conn
+            - @template
+            - @user
+            - @request

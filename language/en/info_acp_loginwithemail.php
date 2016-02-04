@@ -23,7 +23,8 @@ $lang = array_merge($lang, array(
 	'LIWE_ALLOWED'			=> 'Allow email login',
 	'LIWE_ALLOWED_EXPLAIN'	=> 'Allow login with your emailaddress, only if email reuse is off. Save form before you can use LIWE',
 	'ALLOW_EMAIL_LOGIN'		=> '(Email reuse allowed!)',
-	'DUP_RECORDS'			=> '(Duplicate emailaddresses in memberlist!)',
+	'DUP_RECORDS'			=> '(Duplicate <a href="%1$s" data-ajax="true" style="color:red;">emailaddresses</a> in memberlist!)',
+	'DUP_RECORDS_FOUND'		=> 'Duplicate emailaddresses in memberlist!',
 	'LIWE_NOTICE'			=> '<div class="phpinfo"><p class="entry">Config setting of this extension are in %1$s » %2$s » %3$s » %4$s.</p></div>',
-	'FH_HELPER_NOTICE'		=> 'Forumhulp helper application does not exist!<br />Download <a href="">forumhulp/helper</a> and copy the helper folder to your forumhulp extension folder.',
+	'FH_HELPER_NOTICE'		=> 'Forumhulp helper application does not exist!<br />Download <a href="https://github.com/ForumHulp/helper">forumhulp/helper</a> and copy the helper folder to your forumhulp extension folder.',
 ));
