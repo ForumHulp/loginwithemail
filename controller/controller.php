@@ -48,7 +48,7 @@ class controller
 		{
 			$message .= $row['username'] . ' » ' . $row['user_email'] . '<br />';
 		}
-		
+
 		if ($this->request->is_ajax())
 		{
 			$json_response = new \phpbb\json_response;
