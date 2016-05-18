@@ -58,6 +58,7 @@ class m1_initial_module extends container_aware_migration
 			if (!$this->container->has('forumhulp.helper'))
 			{
 				$forumhulp_helper = new \forumhulp\helper\helper(
+					$this->container->get('dbal.conn'),
 					$this->config,
 					$this->container->get('ext.manager'),
 					$this->container->get('template'),
