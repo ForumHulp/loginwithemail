@@ -9,6 +9,11 @@
 
 namespace forumhulp\loginwithemail\controller;
 
+use phpbb\db\driver\driver_interface;
+use phpbb\template\template;
+use phpbb\user;
+use phpbb\request\request;
+
 /**
 * Main controller
 */
@@ -23,7 +28,7 @@ class controller
 	*
 	* @access public
 	*/
-	public function __construct(\phpbb\db\driver\driver_interface $db, \phpbb\template\template $template, \phpbb\user $user, \phpbb\request\request $request)
+	public function __construct(driver_interface $db, template $template, user $user, request $request)
 	{
 		$this->db = $db;
 		$this->template = $template;

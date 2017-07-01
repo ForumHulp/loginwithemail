@@ -2,16 +2,17 @@ services:
     forumhulp.loginwithemail.listener:
         class: forumhulp\loginwithemail\event\listener
         arguments:
-            - @user
-            - @config
-            - @request
-            - @template
+            - '@user'
+            - '@dbal.conn'
+            - '@configv
+            - '@request'
+            - '@template'
         tags:
             - { name: event.listener }
     forumhulp.loginwithemail.controller:
         class: forumhulp\loginwithemail\controller\controller
         arguments:
-            - @dbal.conn
-            - @template
-            - @user
-            - @request
+            - '@dbal.conn'
+            - '@template'
+            - '@user'
+            - '@request'
