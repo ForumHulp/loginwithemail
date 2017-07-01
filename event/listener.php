@@ -11,7 +11,6 @@ namespace forumhulp\loginwithemail\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use phpbb\user;
-use phpbb\db\driver\driver_interface;
 use phpbb\config\config;
 use phpbb\request\request;
 use phpbb\template\template;
