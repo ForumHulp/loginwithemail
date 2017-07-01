@@ -22,7 +22,6 @@ use phpbb\template\template;
 class listener implements EventSubscriberInterface
 {
 	protected $user;
-	protected $db;
 	protected $config;
 	protected $request;
 	protected $template;
@@ -30,10 +29,9 @@ class listener implements EventSubscriberInterface
 	/**
 	* Constructor
 	*/
-	public function __construct(user $user, driver_interface $db, config $config, request $request, template $template)
+	public function __construct(user $user, config $config, request $request, template $template)
 	{
 		$this->user = $user;
-		$this->db = $db;
 		$this->config = $config;
 		$this->request = $request;
 		$this->template = $template;
@@ -42,16 +40,15 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'forumhulp.loginwithemail.modify_sql'	=> 'login_with_email',
-			'core.ucp_remind_modify_select_sql'		=> 'remind_with_email',
 			'core.page_header_after'				=> 'add_email',
+			'forumhulp.loginwithemail.modify_sql'	=> 'login_with_email',
 			'core.acp_board_config_edit_add'		=> 'load_config_on_setup',
 		);
 	}
 
 	public function add_email($event)
 	{
-		if ($this->user->data['user_id'] == ANONYMOUS && $this->config['allow_email_login'] && !$this->request->is_set_post('agreed'))
+		if ($this->user->data['user_id'] == ANONYMOUS && $this->config['allow_email_login'] && !$this->request->is_set_post('agreed') && $this->request->variable('mode', '') != 'sendpassword')
 		{
 			$this->user->add_lang_ext('forumhulp/loginwithemail', 'info_acp_loginwithemail');
 			$this->template->assign_var('L_USERNAME', $this->user->lang['USERNAME'] . $this->user->lang['WITH_EMAIL']);
@@ -72,20 +69,6 @@ class listener implements EventSubscriberInterface
 					FROM ' . USERS_TABLE . "
 					WHERE user_email_hash = '" . phpbb_email_hash($user_email) . "'";
 				$event['sql'] = $sql;
-			}
-		}
-	}
-
-	public function remind_with_email($event)
-	{
-		if (!defined('ADMIN_START') && $this->config['allow_email_login'])
-		{
-			if (!phpbb_validate_email($event['email']))
-			{
-				$sql_array = $event['sql_array'];
-				$sql_array['WHERE'] = "user_email_hash = '" . $this->db->sql_escape(phpbb_email_hash($event['email'])) . "'
-									AND user_email_hash = '" . $this->db->sql_escape(phpbb_email_hash($event['username'])) . "'";
-				$event['sql_array'] = $sql_array;
 			}
 		}
 	}

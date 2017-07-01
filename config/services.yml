@@ -3,7 +3,6 @@ services:
         class: forumhulp\loginwithemail\event\listener
         arguments:
             - '@user'
-            - '@dbal.conn'
             - '@config'
             - '@request'
             - '@template'
