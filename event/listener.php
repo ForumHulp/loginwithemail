@@ -56,7 +56,7 @@ class listener implements EventSubscriberInterface
 
 	public function login_with_email($event)
 	{
-		if (!defined('ADMIN_START') && $this->config['allow_email_login'])
+		if (!defined('ADMIN_START') && $this->config['allow_email_login'] && $this->request->variable('mode', '') != 'sendpassword')
 		{
 			$user_email = $event['username_clean'];
 
