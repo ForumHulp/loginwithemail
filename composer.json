@@ -16,18 +16,16 @@
 	],
 	"require": {
 		"php": ">=5.3.3",
-		"phpbb/phpbb": "3.1.*@dev"
 	},
 	"extra": {
 		"display-name": "Login with your email",
 		"soft-require": {
-			"phpbb/phpbb": "3.1.*@dev"
+			"phpbb/phpbb": "3.1.*"
 		},
 		"version-check": {
             "host": "forumhulp.com",
             "directory": "/ext",
             "filename": "index.php?id=75"
 		}
-
 	}
 }
