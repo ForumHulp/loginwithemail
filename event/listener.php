@@ -78,9 +78,7 @@ class listener implements EventSubscriberInterface
 		{
 			if ($event['submit'])
 			{
-				$this->request->enable_super_globals();
-				$_POST['config']['allow_email_login'] = 0;
-				$this->request->disable_super_globals();
+				$this->request->overwrite('allow_email_login', 0, \phpbb\request\request_interface::POST);
 			}
 
 			$display_vars = $event['display_vars'];
