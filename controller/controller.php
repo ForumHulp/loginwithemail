@@ -45,8 +45,8 @@ class controller
 	{
 		$this->user->add_lang_ext('forumhulp/loginwithemail', 'info_acp_loginwithemail');
 		$sql = 'SELECT username, user_email FROM ' . USERS_TABLE . ' list
-				INNER JOIN (SELECT user_email_hash FROM ' . USERS_TABLE . ' WHERE user_type <> 2
-				GROUP BY user_email_hash HAVING count(user_email_hash) > 1) dup ON list.user_email_hash = dup.user_email_hash';
+				INNER JOIN (SELECT user_email FROM ' . USERS_TABLE . ' WHERE user_type <> 2
+				GROUP BY user_email HAVING count(user_email) > 1) dup ON list.user_email = dup.user_email';
 		$result = $this->db->sql_query($sql);
 		$message = '';
 		while ($row = $this->db->sql_fetchrow($result))
