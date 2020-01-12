@@ -66,7 +66,7 @@ class listener implements EventSubscriberInterface
 
 				$sql = 'SELECT *
 					FROM ' . USERS_TABLE . "
-					WHERE user_email_hash = '" . phpbb_email_hash($user_email) . "'";
+					WHERE user_email = '" . phpbb_email_hash($user_email) . "'";
 				$event['sql'] = $sql;
 			}
 		}
@@ -105,7 +105,7 @@ class listener implements EventSubscriberInterface
 		$not_allowed = false;
 		if (!$config['allow_emailreuse'])
 		{
-			$sql = 'SELECT count(user_email_hash) as cnt FROM ' . USERS_TABLE . ' WHERE user_email_hash > 0 GROUP BY user_email_hash HAVING cnt > 1';
+			$sql = 'SELECT count(user_email) as cnt FROM ' . USERS_TABLE . ' WHERE user_email > 0 GROUP BY user_email HAVING cnt > 1';
 			$result = $db->sql_query($sql);
 			$row = $db->sql_fetchrow($result);
 			$not_allowed = $row;
